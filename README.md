@@ -5,7 +5,7 @@
 <li>Maven Build</li>
 <li>Spring boot web – (For exposing REST API’s)</li>
 <li>Spring boot JPA – (For CRUD operations)</li>
-<li>Spring bootRunner – (For creating unit test cases)</li>
+<li>SpringRunner – (For creating unit test cases)</li>
 <li>Spring boot Validation – ( For native & Custom bean validation.Checks ISBN number is 13 digit or not)</li>
 <li>Spring Doc – (for Open API document specification)</li>
 <li>GitHub – (For version control )</li>
