@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface BookService {
-    public List<Book> getAllBooks( );
+    public Book getBookById( Long id);
 
     public Book addBook( Book bookRecord );
 
@@ -16,4 +16,5 @@ public interface BookService {
     public void deleteById( Long id );
 
     public List<Book> getFilteredBooks( String author, String title, Long isbn, Date published );
+    public List<Book> getAllBooks( );
 }

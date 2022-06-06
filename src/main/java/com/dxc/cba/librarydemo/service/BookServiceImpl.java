@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service // for used with classes that provide some business functionalities
 public class BookServiceImpl implements BookService {
@@ -26,6 +27,15 @@ public class BookServiceImpl implements BookService {
         return book;
     }
 
+
+    @Override
+    public Book getBookById( Long id ) {
+        Optional<Book> book = bookRepository.findById(id);
+        if (((Optional<?>) book).isPresent()) {
+            return book.get();
+        }
+        return null;
+    }
 
     public Book addBook( Book bookRecord ) {
 
@@ -52,6 +62,7 @@ public class BookServiceImpl implements BookService {
     }
 
     public void deleteAll( ) {
+
         bookRepository.deleteAll( );
     }
 }

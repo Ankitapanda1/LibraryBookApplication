@@ -1,28 +1,28 @@
 package com.dxc.cba.librarydemo.controller;
 
-import java.sql.Date;
-import java.util.List;
 import com.dxc.cba.librarydemo.exception.CustomLibraryException;
 import com.dxc.cba.librarydemo.exception.NoSuchBookExistsException;
 import com.dxc.cba.librarydemo.model.Book;
 import com.dxc.cba.librarydemo.service.BookService;
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.jboss.logging.Logger;
 import javax.validation.Valid;
+import java.sql.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class BookController {
-    Logger logger = LoggerFactory.logger( BookController.class );
+    Logger logger = LoggerFactory.getLogger( BookController.class );
 
     @Autowired
     private BookService bookService;
 
-    @PostMapping("/book")
+    @PostMapping("/addBook")
     public ResponseEntity<Book> addBook( @Valid @RequestBody Book bookRecord ) {
         logger.debug( "Adding a new book..." );
         bookRecord.setCreatetime( new Date( System.currentTimeMillis() ) );
@@ -34,14 +34,14 @@ public class BookController {
         }
     }
 
-    @GetMapping("/books")
+    @GetMapping("/getAllbooks")
     public ResponseEntity<List<Book>> getAllBooks( ) {
         logger.debug( "Retriving all books..." );
         return new ResponseEntity<>( bookService.getAllBooks(), HttpStatus.OK );
     }
 
 
-    @GetMapping("/book")
+    @GetMapping("/getFilteredBooks")
     public ResponseEntity<List<Book>> getFilteredbooks(
             @RequestParam(required = false) final Long isbn,
             @RequestParam(required = false) final String author,
@@ -52,7 +52,7 @@ public class BookController {
     }
 
 
-    @PutMapping("/book/{id}")
+    @PutMapping("/updateBook/{id}")
     public ResponseEntity<Book> updateBook(
             @PathVariable("id") final Long id, @Valid @RequestBody final Book bookRecord ) {
         logger.debug( "####Updating book" + id );
@@ -66,7 +66,7 @@ public class BookController {
 
     }
 
-    @DeleteMapping("/book/{id}")
+    @DeleteMapping("/deleteBook/{id}")
     public ResponseEntity<HttpStatus> deleteBook(
             @PathVariable("id") final Long id ) {
         try {
@@ -77,7 +77,14 @@ public class BookController {
         }
 
     }
-
+    @GetMapping("/getBookById/{id}")
+    public ResponseEntity<Book> getBookById(@PathVariable("id") long id) {
+        Book book = bookService.getBookById(id);
+        if (book != null) {                return new ResponseEntity<Book>(book, HttpStatus.OK);
+        } else {
+            throw new NoSuchBookExistsException( "No Such Book exists with this id!!" );
+        }
+    }
 
 }
 
