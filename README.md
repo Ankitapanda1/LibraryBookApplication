@@ -5,7 +5,7 @@
 <li>Maven Build</li>
 <li>Spring boot web – (For exposing REST API’s)</li>
 <li>Spring boot JPA – (For CRUD operations)</li>
-<li>Spring bootRunner – (For creating unit test cases)</li>
+<li>SpringRunner – (For creating unit test cases)</li>
 <li>Spring boot Validation – ( For native & Custom bean validation.Checks ISBN number is 13 digit or not)</li>
 <li>Spring Doc – (for Open API document specification)</li>
 <li>GitHub – (For version control )</li>
@@ -16,7 +16,7 @@
 
 <h1>prerequisite</h1>
 <li>Before starting the application create a  sql schema with name library</li>
-<h1>Calss Description</h1>
+<h1>Class Description</h1>
 <div>
 <ul>
 <li>config/GlobalExceptionHandler .java - Custom global error handling for Rest API's</li>
