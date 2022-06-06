@@ -41,7 +41,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookById( Long id ) {
-        logger.debug( "Adding a new book..." );
+        logger.debug( "getting Book by Id..." );
         Optional<Book> book = bookRepository.findById( id );
         if ( ( (Optional<?>) book ).isPresent( ) ) {
             return book.get();
@@ -52,7 +52,7 @@ public class BookServiceImpl implements BookService {
     }
 
     public Book addBook( Book bookRecord ) {
-
+        logger.debug( "Add Book ..." );
         if ( !ObjectUtils.isEmpty( bookRecord ) ) {
             logger.debug( "Adding a new book..." );
             bookRecord.setCreatetime( new Date( System.currentTimeMillis() ) );
@@ -67,6 +67,7 @@ public class BookServiceImpl implements BookService {
     }
 
     public Book updateBook( Book bookRecord ) {
+        logger.debug( "update Book..." );
         Book book = getBookId(bookRecord.getId() );
         if (book!=null){
             bookRecord.setUpdatetime( new Date( System.currentTimeMillis( ) ) );
@@ -78,6 +79,7 @@ public class BookServiceImpl implements BookService {
     }
 
     public void deleteById( Long id ) {
+        logger.debug( "delete Book by id..." );
         try {
             bookRepository.deleteById( id );
         } catch (Exception e) {
