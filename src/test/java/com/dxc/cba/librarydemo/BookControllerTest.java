@@ -22,7 +22,6 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = BookController.class)
 public class BookControllerTest {
@@ -41,7 +40,7 @@ public class BookControllerTest {
         when( bookService.getAllBooks()).thenReturn(bookArrayList);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-                "/api/books").params(requestParams);
+                "/api/books/getAllbooks").params(requestParams);
 
         mockMvc.perform(requestBuilder).andExpect(status().isOk());
 
@@ -50,7 +49,7 @@ public class BookControllerTest {
     public void testAddBook() throws Exception {
         when(bookService.addBook( any(Book.class))).thenReturn(testBookData());
         RequestBuilder requestBuilder = MockMvcRequestBuilders.post(
-                        "/api/book").accept( MediaType.APPLICATION_JSON).content(asJsonString(testBookData() ))
+                        "/api/books/addBook").accept( MediaType.APPLICATION_JSON).content(asJsonString(testBookData() ))
                 .contentType(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(requestBuilder).andExpect(status().isCreated());
@@ -86,7 +85,7 @@ public class BookControllerTest {
     public void testDeleteBook() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/api/book/1")
+                        .delete("/api/books/deleteBook/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -96,7 +95,7 @@ public class BookControllerTest {
 
         when(bookService.updateBook(any())).thenReturn( testBookData());
         RequestBuilder requestBuilder = MockMvcRequestBuilders.put(
-                        "/api/book/{id}",1L).accept(MediaType.APPLICATION_JSON).content(asJsonString(testBookData()))
+                        "/api/books/updateBook/{id}",1L).accept(MediaType.APPLICATION_JSON).content(asJsonString(testBookData()))
                 .contentType(MediaType.APPLICATION_JSON);
         mockMvc.perform(requestBuilder).andExpect(status().isOk());
     }

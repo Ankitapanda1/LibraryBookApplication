@@ -14,7 +14,8 @@
 </ul>
 </div>
 
-
+<h1>prerequisite</h1>
+<li>Before starting the application create a  sql schema with name library</li>
 <h1>Calss Description</h1>
 <div>
 <ul>
